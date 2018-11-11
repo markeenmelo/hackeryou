@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event fun</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+    //When box is clicked, console.log(`I'm orange`)
+    $(() => {
+        console.log('Ready');
+
+        const getBoxMessage = () => {
+            console.log(`I'm orange`)
+        };
+
+        $('.box').on('click',getBoxMessage);
+    });
+
+</script>
+</body>
+</html>

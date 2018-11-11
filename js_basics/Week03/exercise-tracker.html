@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercise Tracker</title>
+</head>
+<body>
+<script>
+    const weeksWorkout = {};
+
+    const addWorkout = (day, workout, minutes) => {
+        weeksWorkout[day] = {
+            workout: workout,
+            time: minutes
+        }
+    }
+
+    addWorkout('Sunday', 'Stair Master', 30);
+    addWorkout('Monday', 'Zumba', 60);
+    addWorkout('Tuesday', 'HIIT', 45);
+    addWorkout('Wednesday', 'Boxing', 90);
+
+    console.log(weeksWorkout);
+
+    let totalTime = 0;
+
+    for (let day in weeksWorkout) {
+        console.log(weeksWorkout[day]);
+        totalTime = totalTime + weeksWorkout[day].time;
+        console.log(totalTime);
+        if (weeksWorkout[day].time > 60) {
+            console.log(`You crushed your workout on ${day}! You spent ${weeksWorkout[day].time} at ${weeksWorkout[day].workout} class!`)
+        }
+    }
+
+</script>
+</body>
+</html>

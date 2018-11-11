@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Student</title>
+</head>
+<body>
+<script>
+    const student = {
+        equipment: ['Laptop', 'Backpack'],
+        energy: 80,
+        grades: 82,
+        uniform: {
+            top: "hoddie",
+            bottom: 'jeans',
+            shoes: 'sneakers'
+        },
+        eat: function(food) {
+            this.energy = this.energy + food;
+        },
+        newEquipment: function(acquire) {
+            this.equipment.push(acquire)
+        },
+        dressUp: function(newTop, newBottom, newShoes) {
+            this.uniform.top = newTop;
+            this.uniform.bottom = newBottom;
+            this.uniform.shoes = newShoes;
+        }
+        //todo implement the study method
+        // study: function(minutes) {
+        //
+        // },
+
+    }
+</script>
+</body>
+</html>

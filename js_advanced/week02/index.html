@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Promises</title>
+</head>
+<body>
+
+<h1>Promises Example</h1>
+
+<div >
+    <img class="weather-photo" src="" alt="">
+
+</div>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+<script>
+
+    var pokemonApp = {};
+    pokemonApp.url = 'https://pokeapi.co/api/v2/pokemon/2/';
+
+    $(function() {
+        console.log('hello there')
+
+
+        // PROMISE
+        //---------
+
+        const ajax_object = {
+        	url: pokemonApp.url,
+        	dataType: 'JSON'
+        }
+
+        const yapromise = $.ajax(ajax_object)
+
+        console.log(yapromise)
+
+
+        // const when_success = function(pokemon){
+        // 	console.log(pokemon)
+        // }
+
+        // const when_error = function(err){
+        // 	console.log(err)
+        // }
+
+        // $.when(yapromise).then(when_success, when_error )
+
+        // end PROMISE
+
+        // NATIVE PROMISES
+        //-----------------
+        // const cameraPromise = navigator.mediaDevices.getUserMedia({video: true});
+
+        // console.log(cameraPromise)
+
+        // cameraPromise
+        // 	.then(function(localMediaStream){
+        // 		console.log(localMediaStream)
+        // 	})
+        // 	.catch(function(err){
+        // 		console.log('oops, an error!', err)
+        // 	})
+
+        // end NATIVE PROMISES
+
+        // FETCH
+        //-------
+
+        // window.fetch('https://api.github.com/users/wesbos')
+        // .then(function(data){
+        // 	console.log(data)
+        // 	return data.json()
+        // })
+        // .then(function(data){
+        // 	console.log(data)
+        // })
+        // .catch(function(err){
+        // 	console.log(err)
+        // })
+// 657f33fa721e8fc1571c721d5ea85566
+        // function getPhotosofCurrentWeather(){
+        // 	fetch('https://api.openweathermap.org/data/2.5/weather?q=Toronto&APPID=657f33fa721e8fc1571c721d5ea85566')
+        // 		.then(data => data.json())
+        // 		.then(forecast => {
+        // 			console.log(forecast.weather[0].main)
+        // 			return fetch(`https://api.unsplash.com/search/photos?client_id=5616e0b41498a937ac220b972d5d053def509965e6d5dc8b93ba03fc9d1134da&query=${forecast.weather[0].main}`)
+        // 		})
+        // 		.then(data => data.json())
+        // 		.then(photos => {
+        // 			console.log(photos)
+        // 			$('.weather-photo').attr('src', photos.results[0].urls.small)
+        // 		})
+        // 		.catch(err => {
+        // 			console.log(err)
+        // 		})
+        // }
+
+
+        // getPhotosofCurrentWeather();
+
+
+
+        // end FETCH
+
+        // ASYNC + AWAIT
+
+        // async function getPhotosofCurrentWeather(){
+        // 	try{
+        // 		const forecast = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Toronto&APPID=657f33fa721e8fc1571c721d5ea85566').then(data => data.json())
+        // 		const photos = await fetch(`https://api.unsplash.com/search/photos?client_id=5616e0b41498a937ac220b972d5d053def509965e6d5dc8b93ba03fc9d1134da&query=${forecast.weather[0].main}`).then(data => data.json())
+        // 		console.log(forecast, photos)
+        // 		$('.weather-photo').attr('src', photos.results[1].urls.small)
+        // 	} catch(err){
+        // 		console.log(err)
+        // 	}
+        // }
+
+        // getPhotosofCurrentWeather();
+
+        // end A + A
+
+        // Make your own
+
+        // function getCoffee(){
+        // 	return new Promise(function(resolve, reject){
+        // 		setTimeout(() => resolve('COffee!'), 2000)
+        // 	})
+        // }
+
+        // getCoffee()
+        // 	.then(coffee => {
+        // 		console.log(coffee)
+        // 	})
+
+        // async function wakeUp() {
+        // 	const coffee = await getCoffee();
+        // 	console.log('this is the ...', coffee)
+        // }
+
+        // wakeUp()
+
+
+        // end Make your own
+
+        // $.WHEN
+
+        // let pokemonApp = {}
+
+        // pokemonApp.getPokemon = $.ajax({
+        // 	url : 'https://pokeapi.co/api/v2/pokemon/1/',
+        //  method: 'GET',
+        //  dataType : 'JSON',
+        // })
+
+        // $.when(pokemonApp.getPokemon).then((caughtPokemon) => {
+        // 	console.log(caughtPokemon)
+        // })
+
+        // pokemonApp.pokemonOne = $.ajax({
+        // 	url : 'https://pokeapi.co/api/v2/pokemon/1/',
+        //  method: 'GET',
+        //  dataType : 'JSON',
+        // })
+
+        // pokemonApp.pokemonTwo = $.ajax({
+        // 	url : 'https://pokeapi.co/api/v2/pokemon/2/',
+        //  method: 'GET',
+        //  dataType : 'JSON',
+        // })
+
+        // $.when(pokemonApp.pokemonOne, pokemonApp.pokemonTwo)
+        // 	.then((caughtPokemonOne, caughtPokemonTwo) => {
+        // 		console.log(caughtPokemonOne, caughtPokemonTwo)
+        // 	})
+        // 	.fail((err1, err2) => {
+        // 		console.log(err1, err2)
+        // 	})
+
+        // function getPokemon(number){
+        // 	return $.ajax({
+        // 		url: `https://pokeapi.co/api/v2/pokemon/${number}/`,
+        // 		dataType: 'json',
+        // 		method: 'GET'
+        // 	})
+        // 	// .then((pokemon) => {
+        // 	// 	console.log(`${pokemon.name} is pokemon ${pokemon.id}`)
+        // 	// })
+        // }
+
+        // const pokemon = [];
+        // for(let i = 1; i <= 40; i++){
+        // 	pokemon.push(getPokemon(i))
+        // }
+
+        // $.when(...pokemon)
+        // 	.then((...args) =>{
+        // 		console.log(args)
+        // 		// args.forEach((poke,i) => console.log(poke[0].name, poke[0].id))
+        // 		let new_args = args.map(data => data[0])
+        // 		console.log(new_args);
+        // 		new_args.forEach((poke) => console.log(poke.name, poke.id))
+        // 	})
+
+
+
+        // end $.WHEN
+
+
+    }); // end Document Ready
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Functional Programming Exercises</title>
+</head>
+<body>
+    <script>
+        // Map:
+        // Let's take this array of dog's ages in human years, and create a new array of ages in dog years that shows each value multipled by 7
+        const ages = [2, 1.5, 5, 9, 4, 5];
+        const dogsAge = ages.map((age) => age * 7);
+
+        console.log(dogsAge);
+
+
+        // Let's take an array of strings and create a new array of the same strings, but all uppercase
+        const names = ['Sam', 'Jo', 'Chris'];
+        const allCaps = names.map((name) => name.toUpperCase());
+
+        console.log(allCaps);
+
+
+        // Filter:
+        // Create a new array with users who are older than 20 years old
+        const users = [
+            { name: 'Sam', age: 16 },
+            { name: 'Jo', age: 25 },
+            { name: 'Chris', age: 90 },
+            { name: 'Jules', age: 9 }
+        ];
+        const adults = users.filter((user) => user.age > 20);
+
+        console.log(adults);
+
+        // Create a new array with only titles longer than 8 characters
+        const posts = ['War and Peace', 'Moby Dick', 'Hamlet', 'The Odyssey', 'The Great Gatsby'];
+        const longNames = posts.filter((post) => post.length > 8);
+
+        console.log(longNames);
+
+
+        // Reduce:
+        // Return the largest number
+        const nums = [2, 4, 6, 8];
+        let totalValue;
+        const sumNumbers = nums.reduce((total, currentValue) => totalValue = total + currentValue);
+
+        console.log(sumNumbers);
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Warrior</title>
+</head>
+<body>
+
+<script>
+    const warrior = {
+        type: "Paladin",
+        equipment: ['Bow', 'Arrow', 'Horse', 'Potion'],
+        age: 104,
+        strength: 9,
+        energy: 100,
+        increaseStrength: function() {
+            this.strength++
+        },
+        location: {
+          x: 0,
+          y: 0
+        },
+        walk: function(xCoordinate, yCoordinate) {
+            this.location.x = xCoordinate;
+            this.location.y = yCoordinate;
+        },
+        strike: function(hit) {
+            this.energy = this.energy - hit;
+        },
+        pickUpEquipment: function(pickup) {
+            this.equipment.push(pickup)
+        }
+    };
+    
+</script>
+
+</body>
+</html>

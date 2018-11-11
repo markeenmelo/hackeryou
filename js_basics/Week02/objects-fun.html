@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Objects</title>
+</head>
+<body>
+<script>
+    // const person = {
+    //     'name' : 'Marcos',
+    //     'age' : 32,
+    //     'height' : 1.72
+    // };
+    // console.log(person['age'])
+
+    // const hackerYou = {
+    //     numberOfCourses: 9,
+    //     instructorName: 'Anne',
+    //     schoolAge: 5
+    // }
+    //
+    // const student = {
+    //     id: 699,
+    //     name: 'Marcos',
+    //     age: 32,
+    //     gpa: 82,
+    //     highSchool: 'Colégio Santana'
+    // }
+    //
+    // console.log(`The student is ${student.name} (ID ${student.id}) is ${student.age}. He has a GPA of ${student.gpa} and he is from ${student.highSchool}.`)
+    //
+    // const clothing = {
+    //     socks: 34,
+    //     shoes: 2,
+    //     pants: 3
+    // }
+    //
+    // for (item in clothing) {
+    //     console.log(item + ' qty: ' + clothing[item])
+    // }
+
+    const inventory = {
+        apples: 2,
+        oranges: 3,
+        bananas: 6,
+        milk: 2
+    };
+
+    let message = '';
+
+    for (item in inventory) {
+        message += ` ${inventory[item]} ${item},`
+        // console.log(`We have ${inventory[item]} ${item}`);
+    }
+
+    console.log(`We have${message} in stock`)
+
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Times</title>
+</head>
+<body>
+  <script>
+    // here is a list of timecodes from some youtube videos:
+    const times =  ["5:17", "8:22", "3:34", "5:23", "7:12", "7:24", "6:46", "4:45", "4:40", "7:58", "11:51", "9:13", "5:50", "5:52", "5:49", "8:57", "11:29", "3:07", "5:59", "3:31"];
+
+    // using reduce, calculate to total hours, minutes and seconds
+    const timeReduce = times.reduce((time, total) => `The total time in minutes is ${(time + total)}`)
+
+    // Tip: You'll have to _split_ the strings into minutes and seconds, and then tally the total minutes
+  </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map 1</title>
+</head>
+<body>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+    }
+
+    .map {
+        width:100%;
+        height:400px;
+    }
+</style>
+
+<div class="map"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXxkEUISB_ENhR6Jjw91rsKSNorWYgAeg" type="text/javascript"></script>
+
+
+<script>
+    const app = {};
+
+    app.loadMap = function() {
+        // 1. all the options for the google map are held in an object
+
+        const mapStyle = [
+            {
+                "featureType": "administrative",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#444444"
+                    }
+                ]
+            },
+            {
+                "featureType": "landscape",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "color": "#f2f2f2"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "saturation": -100
+                    },
+                    {
+                        "lightness": 45
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "simplified"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "color": "#46bcec"
+                    },
+                    {
+                        "visibility": "on"
+                    }
+                ]
+            }
+        ]
+
+        const mapOptions = {
+            center: {lat: 43.264009, lng: -79.874947},
+            zoom: 8,
+            gestureHandling: "cooperative",
+            styles: mapStyle
+        }
+
+        // 2. we also select the map div with jquery, but only the first item in the array
+        const mapDiv = $('.map')[0]
+
+        // 3. which we then pass to the map method and store
+        app.map = new google.maps.Map(mapDiv, mapOptions)
+
+
+    } // end app.loadMap definition
+
+    app.loadMarkers = () => {
+        const currentLocation = navigator.geolocation.getCurrentPosition(position => {
+            new google.maps.Marker({
+                position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                map: app.map
+            })
+        })
+        const work = new google.maps.Marker({
+            position: new google.maps.LatLng(43.6451813,-79.6156516),
+            map: app.map
+        })
+
+        const cnTower = new google.maps.Marker({
+            position: new google.maps.LatLng(43.6425662,-79.3892455,),
+            map: app.map
+        })
+
+        const eatonCentre = new google.maps.Marker({
+            position: new google.maps.LatLng(43.6544382,-79.3828881,),
+            map: app.map
+        })
+
+        const infowindow = new google.maps.InfoWindow()
+        google.maps.event.addListener(currentLocation, 'click', () => {
+            // set the content and open the window
+            infowindow.setContent(`You are at the`);
+            infowindow.open(app.map, currentLocation);
+        })
+
+        google.maps.event.addListener(work, 'click', () => {
+            // set the content and open the window
+            infowindow.setContent("Work");
+            infowindow.open(app.map, work);
+        })
+
+        google.maps.event.addListener(cnTower, 'click', () => {
+            // set the content and open the window
+            infowindow.setContent("Cn Tower");
+            infowindow.open(app.map, cnTower);
+        })
+
+        google.maps.event.addListener(eatonCentre, 'click', () => {
+            // set the content and open the window
+            infowindow.setContent("Eaton Centre");
+            infowindow.open(app.map, eatonCentre);
+        })
+    }
+
+
+    $(function() {
+        // 4. call load map when the document is ready
+        app.loadMap()
+        app.loadMarkers()
+
+    }); // end doc ready
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+import React, {Component} from 'react'
+import ShowTodos from './components/ShowTodos'
+import AddTodo from './components/AddTodo'
+import axios from 'axios'
+
+class TodoApp extends Component {
+    state = {
+        todo: '',
+        todos: []
+    }
+
+    componentDidMount() {
+        this.refresh()
+    }
+
+    clearInput = () => {
+        this.setState({todo: ''})
+    }
+
+    refresh = async () => {
+        try {
+            const response = await axios.get('/todos')
+            const todos = response.data.data
+            this.setState({todos})
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    addTodo = async () => {
+        try {
+            await axios.post('/todos', {
+                todo: this.state.todo
+            })
+            this.refresh()
+        } catch (e) {
+            console.log(e)
+        }
+        this.clearInput()
+    }
+
+    removeTodo = async index => {
+        try {
+            axios.delete(`/todos/${index}`)
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
+    handleChange = e => {
+        this.setState({
+            todo: e.target.value
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                <AddTodo
+                    handleChange={this.handleChange}
+                    addTodo={this.addTodo}
+                    todo={this.state.todo}
+                />
+                <ShowTodos todos={this.state.todos} removeTodo={this.removeTodo}/>
+            </div>
+        )
+    }
+}
+
+export default TodoApp
