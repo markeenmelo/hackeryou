@@ -49,8 +49,7 @@ app.init = () => {
         const id = $(this).data('id')
         app.database.ref(`chat/${id}`).remove()
     })
-    app.chat.limitToLast(10).on('child_removed', message => message.find(`#${message.key}`).remove())
-    app.messageList.find()
+    app.chat.limitToLast(10).on('child_removed', message => app.messageList.find(`#${message.key}`).remove())
 }
 
 $(() => {
