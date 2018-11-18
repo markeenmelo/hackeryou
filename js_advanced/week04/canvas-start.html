@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+  <form action="" class="settings">
+
+    <label for="color">Color</label>
+    <input type="color" name="color" value="#BADA55">
+    <label for="width">Line Width:</label>
+    <input type="range" name="width" min="1" max="100" value="10" id="slider">
+
+    <a class="download" href="#">Download</a>
+
+  </form>
+
+  <canvas id="draw" width="1000" height="1000"></canvas>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background:#1D425D;
+      text-align: center;
+    }
+
+    #draw {
+      margin:50px auto;
+      border:2px solid white;
+    }
+
+    #draw:active {
+      cursor:crosshair;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <script>
+    let canvas = document.getElementById('draw')
+    let ctx = canvas.getContext('2d')
+
+    let slider = document.getElementById('slider')
+    output.innerHTML = slider.value
+
+    slider.oninput = () => output.innerHTML = this.value
+
+
+    canvas.addEventListener('mousemove', event => {
+        const radians = (Math.PI/180) * 360
+        ctx.beginPath()
+        ctx.fillStyle = 'black'
+        ctx.arc(event.offsetX, event.offsetY, slider.val(), 0, radians)
+        ctx.fill()
+    })
+
+  </script>
+
+</body>
+</html>
