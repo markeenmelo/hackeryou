@@ -1,0 +1,13 @@
+Superhero API
+https://superheroapi.com/index.html
+513051169181528
+
+
+Marvel API
+https://developer.marvel.com/account
+Public: 39febefd53e04660358bf2b52dbc1291
+Private: e649035720e3f95d154d87f941e2fd4c75cb531e
+
+md5(ts+privateKey+publicKey)
+e649035720e3f95d154d87f941e2fd4c75cb531e39febefd53e04660358bf2b52dbc1291
+https://gateway.marvel.com/v1/public/comics?ts=2018-12-03T04:53:18.525Z&apikey=39febefd53e04660358bf2b52dbc1291&hash=4e78c9a90531bf6de5463d1de6c3fc11

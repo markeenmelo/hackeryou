@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^3.6.0",
-    "@material-ui/icons": "^3.0.1",
+    "@material-ui/core": "^3.6.1",
     "axios": "^0.18.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1",
-    "typeface-roboto": "0.0.54"
+    "react-select": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -25,5 +24,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "dotenv": "^6.1.0"
+  }
 }
