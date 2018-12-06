@@ -19,7 +19,7 @@ function SimpleAppBar(props) {
             <AppBar position="static" color="default">
                 <Toolbar>
                     <Typography variant="h6" color="inherit">
-                        HackerYou Project 3
+                        Best movie of the Year by Genre
                     </Typography>
                 </Toolbar>
             </AppBar>

@@ -1,21 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import {withStyles} from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
-import red from '@material-ui/core/colors/red'
+import Grid from '@material-ui/core/Grid'
+
 import axios from "axios"
 
 const styles = theme => ({
   card: {
-    maxWidth: 800,
+    maxWidth: 310,
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '150%', // 16:9
   },
   actions: {
     display: 'flex',
@@ -26,29 +27,28 @@ class ShowMovies extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      movies: [],
-      expanded: false
+      movies: []
     }
   }
 
   componentDidMount() {
     axios
-        .get(`${process.env.REACT_APP_API_URL}discover/movie?with_genres=${this.props.genre.value}&api_key=${process.env.REACT_APP_API_KEY}`)
+        .get(`${process.env.REACT_APP_API_URL}discover/movie?with_genres=${this.props.genre.value}&primary_release_year=${this.props.year}&sort_by=vote_average.desc&api_key=${process.env.REACT_APP_API_KEY}`)
         .then(res => this.setState({movies: res.data.results}))
         .catch(err => err)
   }
 
-  componentDidUpdate(prevProps, prevState): void {
-    if (prevProps.genre.value !== this.props.genre.value) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.genre.value !== this.props.genre.value || prevProps.year !== this.props.year) {
       axios
-          .get(`${process.env.REACT_APP_API_URL}discover/movie?with_genres=${this.props.genre.value}&api_key=${process.env.REACT_APP_API_KEY}`)
+          .get(`${process.env.REACT_APP_API_URL}discover/movie?with_genres=${this.props.genre.value}&primary_release_year=${this.props.year}&sort_by=vote_average.desc&api_key=${process.env.REACT_APP_API_KEY}`)
           .then(res => this.setState({movies: res.data.results}))
           .catch(err => err)
     }
   }
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
 
     let listMovies = this.state.movies.map(movie => {
       return (
@@ -57,8 +57,8 @@ class ShowMovies extends React.Component {
               key={movie.id}
           >
             <CardHeader
-                title={movie.title}
-                subheader={movie.release_date}
+                title={movie.original_title}
+                subheader={movie.title}
             />
             <CardMedia
                 className={classes.media}
@@ -66,16 +66,24 @@ class ShowMovies extends React.Component {
             />
             <CardContent>
               <Typography component="p">
-                {movie.overview}
+                <strong>Year Released:</strong> <p>{movie.release_date}</p>
+                <strong>Synopses:</strong> <p>{movie.overview}</p>
               </Typography>
             </CardContent>
-      </Card>
-    )
+          </Card>
+      )
     })
 
     return (
         <div>
-        {listMovies}
+          <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="stretch"
+          >
+            {listMovies}
+          </Grid>
         </div>
     )
   }
