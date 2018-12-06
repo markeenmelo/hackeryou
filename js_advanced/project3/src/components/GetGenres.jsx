@@ -70,6 +70,7 @@ class GetGenres extends React.Component {
               value={this.state.genre}
               onChange={this.handleChange}
               options={this.state.genres}
+              placeholder="Genre"
           />
           <form className={classes.container} noValidate autoComplete="off" onSubmit={event => event.preventDefault()}>
             <TextField
