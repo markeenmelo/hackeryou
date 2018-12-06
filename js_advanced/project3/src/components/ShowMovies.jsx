@@ -33,7 +33,7 @@ class ShowMovies extends React.Component {
 
   componentDidMount() {
     axios
-        .get(`${process.env.REACT_APP_API_URL}discover/movie?with_genres=${this.props.genre.value}&primary_release_year=${this.props.year}&media_type=movie&vote_count.gte=0&list_style=1&sort_by=popularity.desc&api_key=${process.env.REACT_APP_API_KEY}`)
+        .get(`${process.env.REACT_APP_API_URL}discover/movie?with_genres=${this.props.genre.value}&adult=false&primary_release_year=${this.props.year}&media_type=movie&vote_count.gte=0&list_style=1&sort_by=popularity.desc&api_key=${process.env.REACT_APP_API_KEY}`)
         .then(res => this.setState({movies: res.data.results}))
         .catch(err => err)
   }
@@ -41,7 +41,7 @@ class ShowMovies extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.genre.value !== this.props.genre.value || prevProps.year !== this.props.year) {
       axios
-          .get(`${process.env.REACT_APP_API_URL}discover/movie?with_genres=${this.props.genre.value}&primary_release_year=${this.props.year}&media_type=movie&vote_count.gte=0&list_style=1&sort_by=popularity.desc&api_key=${process.env.REACT_APP_API_KEY}`)
+          .get(`${process.env.REACT_APP_API_URL}discover/movie?with_genres=${this.props.genre.value}&adult=false&primary_release_year=${this.props.year}&media_type=movie&vote_count.gte=0&list_style=1&sort_by=popularity.desc&api_key=${process.env.REACT_APP_API_KEY}`)
           .then(res => this.setState({movies: res.data.results}))
           .catch(err => err)
     }

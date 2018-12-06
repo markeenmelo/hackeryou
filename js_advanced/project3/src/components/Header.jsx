@@ -19,7 +19,7 @@ function SimpleAppBar(props) {
             <AppBar position="static" color="default">
                 <Toolbar>
                     <Typography variant="h6" color="inherit">
-                        Best movie of the Year by Genre
+                        Best Movies by Genre/Year
                     </Typography>
                 </Toolbar>
             </AppBar>
