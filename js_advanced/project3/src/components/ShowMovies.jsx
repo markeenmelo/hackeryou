@@ -1,24 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import classnames from 'classnames'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
-import CardActions from '@material-ui/core/CardActions'
-import Collapse from '@material-ui/core/Collapse'
-import Avatar from '@material-ui/core/Avatar'
-import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import red from '@material-ui/core/colors/red'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
 import axios from "axios"
 
 const styles = theme => ({
   card: {
-    maxWidth: 400,
+    maxWidth: 800,
   },
   media: {
     height: 0,
@@ -26,26 +19,10 @@ const styles = theme => ({
   },
   actions: {
     display: 'flex',
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-    marginLeft: 'auto',
-    [theme.breakpoints.up('sm')]: {
-      marginRight: -8,
-    },
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
+  }
 })
 
-  class ShowMovies extends React.Component {
+class ShowMovies extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -61,81 +38,46 @@ const styles = theme => ({
         .catch(err => err)
   }
 
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
+  componentDidUpdate(prevProps, prevState): void {
+    if (prevProps.genre.value !== this.props.genre.value) {
+      axios
+          .get(`${process.env.REACT_APP_API_URL}discover/movie?with_genres=${this.props.genre.value}&api_key=${process.env.REACT_APP_API_KEY}`)
+          .then(res => this.setState({movies: res.data.results}))
+          .catch(err => err)
+    }
   }
 
   render() {
     const { classes } = this.props;
 
-    return (
-        <Card className={classes.card}>
-          <CardHeader
-              avatar={
-                <Avatar aria-label="Recipe" className={classes.avatar}>
-                  R
-                </Avatar>
-              }
-              action={
-                <IconButton>
-                  <MoreVertIcon />
-                </IconButton>
-              }
-              // title={this.movies[0].title}
-              subheader="September 14, 2016"
-          />
-          <CardMedia
-              className={classes.media}
-              image="/static/images/cards/paella.jpg"
-              title="Paella dish"
-          />
-          <CardContent>
-            <Typography component="p">
-              This impressive paella is a perfect party dish and a fun meal to cook together with your
-              guests. Add 1 cup of frozen peas along with the mussels, if you like.
-            </Typography>
-          </CardContent>
-          <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton
-                className={classnames(classes.expand, {
-                  [classes.expandOpen]: this.state.expanded,
-                })}
-                onClick={this.handleExpandClick}
-                aria-expanded={this.state.expanded}
-                aria-label="Show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
-          <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+    let listMovies = this.state.movies.map(movie => {
+      return (
+          <Card
+              className={classes.card}
+              key={movie.id}
+          >
+            <CardHeader
+                title={movie.title}
+                subheader={movie.release_date}
+            />
+            <CardMedia
+                className={classes.media}
+                image={`http://image.tmdb.org/t/p/original${movie.poster_path}`}
+            />
             <CardContent>
-              <Typography paragraph>Method:</Typography>
-              <Typography paragraph>
-                Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-                minutes.
-              </Typography>
-              <Typography paragraph>
-                Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-                heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-                browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving
-                chicken and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion,
-                salt and pepper, and cook, stirring often until thickened and fragrant, about 10
-                minutes. Add saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-              </Typography>
-              <Typography paragraph>
-                Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-                without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat
-                to medium-low, add reserved shrimp and mussels, tucking them down into the rice, and
-                cook again without stirring, until mussels have opened and rice is just tender, 5 to 7
-                minutes more. (Discard any mussels that don’t open.)
-              </Typography>
-              <Typography>
-                Set aside off of the heat to let rest for 10 minutes, and then serve.
+              <Typography component="p">
+                {movie.overview}
               </Typography>
             </CardContent>
-          </Collapse>
-        </Card>
-    );
+      </Card>
+    )
+    })
+
+    return (
+        <div>
+        {listMovies}
+        </div>
+    )
   }
 }
 
