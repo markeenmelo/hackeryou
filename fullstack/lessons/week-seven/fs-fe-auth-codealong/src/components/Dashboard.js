@@ -13,20 +13,41 @@ class Dashboard extends React.Component {
       [e.target.name]: e.target.value
     });
   };
-  componentDidMount() {
+  async componentDidMount() {
     // 1. When the dashboard loads, get the user's token
+    const token = getToken()
     // 2. Send a GET request to /todo and pass the token to grab a list of ONLY this user's todos
-    // 3. If we get a successful response, store the todos in state.
+    try {
+      const res = await axios.get('todo', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log(res)
+      this.setState({ todos: res.data })
+    } catch (e) {
+      console.error(e)
+    }
   }
-  handleSubmit = e => {
+
+  handleSubmit = async e => {
     e.preventDefault();
     const { todo } = this.state;
-
     // 1. Get the user's token
+    const token = getToken();
     // 2. Send a POST to /todo with
-    //  a - the body containing the TODO we wish to post
-    //  b - the Authorization Header Bearer <token>
+    try {
+      const res = await axios.post('/todo', { description: todo }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log(res)
+    } catch(e) {
+      console.error(e)
+    }
   };
+
   render() {
     return (
       <div>
