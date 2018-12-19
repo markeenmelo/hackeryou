@@ -81,6 +81,6 @@ class ShowMovies extends React.Component {
 
 ShowMovies.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+}
 
 export default withStyles(styles)(ShowMovies);

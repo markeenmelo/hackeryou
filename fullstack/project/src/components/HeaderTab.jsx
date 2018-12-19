@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import ShowMovies from "./ShowMovies"
+import AddMovies from "./AddMovies"
 
 function TabContainer(props) {
   return (
@@ -44,12 +45,12 @@ class HeaderTab extends React.Component {
           <AppBar position="static">
             <Tabs value={value} onChange={this.handleChange}>
               <Tab value="one" label="Show Movies" />
-              <Tab value="two" label="Item Two" />
+              <Tab value="two" label="Add Movies" />
               <Tab value="three" label="Item Three" />
             </Tabs>
           </AppBar>
           {value === 'one' && <TabContainer><ShowMovies/></TabContainer>}
-          {value === 'two' && <TabContainer>Item Two</TabContainer>}
+          {value === 'two' && <TabContainer><AddMovies/></TabContainer>}
           {value === 'three' && <TabContainer>Item Three</TabContainer>}
         </div>
     );
