@@ -33,7 +33,7 @@ class AddMovies extends React.Component {
     })
   }
 
-  submitMovie = () => {
+  submitMovie() {
     axios.post(process.env.REACT_APP_API_URL + '/movies', ({
       title: this.state.title,
       release_date: Number(this.state.release_date),
