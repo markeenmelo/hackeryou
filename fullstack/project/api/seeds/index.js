@@ -8,7 +8,7 @@ const truncateDatabase = async () => {
 }
 
 const makeSeeds = async () => {
-  await mongoose.connect(process.env.DB_URI)
+  await mongoose.connect(process.env.DB_URI, {useNewUrlParser: true})
   await truncateDatabase()
   await Promise.all(movies.map(movie => movie.save()))
   mongoose.connection.close()

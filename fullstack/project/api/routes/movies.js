@@ -39,10 +39,8 @@ router.post('/', async (req, res, next) => {
 router.delete('/:movie_id', async (req, res, next) => {
   const {movie_id} = req.params
   try {
-    const doc = await Movie.findOneAndDelete(movie_id)
-    res.status(204).send({
-      data: [doc]
-    })
+    await Movie.findOneAndDelete(movie_id)
+    res.status(204)
   } catch (e) {
     next(e)
   }

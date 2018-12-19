@@ -42,43 +42,45 @@ class ShowMovies extends React.Component {
   }
 
   static removeMovie(movieId) {
-    // axios.delete(`${process.env.REACT_APP_API_URL}/movies/${movieId}`)
-    console.log(movieId)
+    axios.delete(`${process.env.REACT_APP_API_URL}/movies/${movieId}`)
+    window.location.reload()
   }
+
   render() {
     const {classes} = this.props;
 
     let listMovies = this.state.movies.map(movie => {
       return (
-            <Card className={classes.card} key={movie._id}>
-              <CardHeader
-                  title={movie.title}
-              />
-              <CardMedia
-                  className={classes.media}
-                  image={movie.poster_path}
-              />
-              <CardContent>
-                <Typography component="p"><strong>Year Released: </strong>{movie.release_date}</Typography>
-                <Typography component="p"><strong>Rate: {movie.rate}</strong></Typography>
-                <Typography component="p"><strong>Synopses:</strong> {movie.overview}</Typography>
-              </CardContent>
-              <Button variant="outlined" color="secondary" className={classes.button} onClick={ShowMovies.removeMovie.bind(null, movie._id)}>
-                Remove Movie
-              </Button>
-            </Card>
+          <Card className={classes.card} key={movie._id}>
+            <CardHeader
+                title={movie.title}
+            />
+            <CardMedia
+                className={classes.media}
+                image={movie.poster_path}
+            />
+            <CardContent>
+              <Typography component="p"><strong>Year Released: </strong>{movie.release_date}</Typography>
+              <Typography component="p"><strong>Rate: {movie.rate}</strong></Typography>
+              <Typography component="p"><strong>Synopses:</strong> {movie.overview}</Typography>
+            </CardContent>
+            <Button variant="outlined" color="secondary" className={classes.button}
+                    onClick={ShowMovies.removeMovie.bind(null, movie._id)}>
+              Remove Movie
+            </Button>
+          </Card>
       )
     })
 
     return (
-          <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="stretch"
-          >
-            {listMovies}
-          </Grid>
+        <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="stretch"
+        >
+          {listMovies}
+        </Grid>
     )
   }
 }

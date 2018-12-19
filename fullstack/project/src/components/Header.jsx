@@ -19,7 +19,7 @@ function SimpleAppBar(props) {
         <AppBar position="static" color="default">
           <Toolbar>
             <Typography variant="h4" color="inherit" align="center">
-              Blockbuster
+              Marcos` HackerYou FullStack Final Project
             </Typography>
           </Toolbar>
         </AppBar>
