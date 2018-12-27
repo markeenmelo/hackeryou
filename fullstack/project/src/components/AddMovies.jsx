@@ -20,11 +20,11 @@ const styles = theme => ({
 
 class AddMovies extends React.Component {
   state = {
-    title: null,
-    release_date: null,
-    rate: null,
-    poster_path: null,
-    overview: null
+    title: '',
+    release_date: '',
+    rate: '',
+    poster_path: '',
+    overview: ''
   };
 
   handleChange = name => event => {
@@ -33,7 +33,7 @@ class AddMovies extends React.Component {
     })
   }
 
-  submitMovie() {
+  submitMovie = () => {
     axios.post(process.env.REACT_APP_API_URL + '/movies', ({
       title: this.state.title,
       release_date: Number(this.state.release_date),
